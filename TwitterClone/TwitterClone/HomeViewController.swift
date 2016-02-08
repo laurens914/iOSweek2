@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, UITableViewDataSource
     {
         didSet
         {
-            //
+            self.tableView.reloadData()
         }
     }
     
