@@ -16,6 +16,7 @@
 		89CAFFA31C69163A0007D6AB /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAFFA21C69163A0007D6AB /* Tweet.swift */; };
 		89CAFFA61C69167C0007D6AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAFFA51C69167C0007D6AB /* User.swift */; };
 		89CAFFA81C692A960007D6AB /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CAFFA71C692A960007D6AB /* tweet.json */; };
+		CBD1B4A51C6A801200C8BAE6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD1B4A41C6A801200C8BAE6 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		89CAFFA21C69163A0007D6AB /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		89CAFFA51C69167C0007D6AB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		89CAFFA71C692A960007D6AB /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = tweet.json; path = ../tweet.json; sourceTree = "<group>"; };
+		CBD1B4A41C6A801200C8BAE6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				89CAFFA71C692A960007D6AB /* tweet.json */,
 				89CAFF9F1C6913F60007D6AB /* JSONParser.swift */,
+				CBD1B4A41C6A801200C8BAE6 /* API.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				89CAFF8D1C690F3D0007D6AB /* HomeViewController.swift in Sources */,
 				89CAFF8B1C690F3D0007D6AB /* AppDelegate.swift in Sources */,
 				89CAFFA01C6913F60007D6AB /* JSONParser.swift in Sources */,
+				CBD1B4A51C6A801200C8BAE6 /* API.swift in Sources */,
 				89CAFFA31C69163A0007D6AB /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +348,7 @@
 				89CAFF9B1C690F3E0007D6AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
