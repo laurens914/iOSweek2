@@ -47,6 +47,9 @@ class HomeViewController: UIViewController, UITableViewDataSource
         API.shared.getTweets { (tweets) -> () in
             if let tweets = tweets {
                 self.tweets = tweets
+                API.shared.getUser{ (user: User?) -> () in
+                    print(user?.name) 
+                }
             }
         }
     }

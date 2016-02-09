@@ -9,7 +9,7 @@
 import UIKit
 
 typealias JSONParserCompletion = (success: Bool, tweets: [Tweet]?) -> ()
-
+typealias JSONParserUserCompletion = (success: Bool, user: User?) -> ()
 class JSONParser
 {
     class func tweetJSONFrom(data: NSData, completion: JSONParserCompletion)
@@ -38,6 +38,17 @@ class JSONParser
         } catch _ { completion(success: false, tweets: nil) }
     }
     
+    class func userJSONFrom(data: NSData, completion: JSONParserUserCompletion)
+    {
+        do {
+            var user: User?
+            if let rootObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String: AnyObject]{
+                user = userFromTweetJSON(rootObject)
+
+            }
+            completion(success: true, user: user)
+        } catch _ { completion(success: false, user: nil) }
+    }
     
     //MARK: Helper Functions 
     
