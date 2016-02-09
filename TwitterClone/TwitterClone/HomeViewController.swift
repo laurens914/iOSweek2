@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accounts
 
 class HomeViewController: UIViewController, UITableViewDataSource
 {
@@ -29,7 +30,28 @@ class HomeViewController: UIViewController, UITableViewDataSource
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.update()
+    }
+
+
+    override func viewDidAppear(animated: Bool) {
+        API.shared.getAccounts { (accounts) -> () in
+            let alertController = UIAlertController(title: "Which account?", message: "Pick one!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            guard let accounts = accounts else {
+                return
+            }
+
+            for account in accounts {
+                alertController.addAction(UIAlertAction(title: account.username, style: .Default, handler: {(_) -> () in
+                    API.shared.getTweetsForAccount(account, completion: {(tweets) -> () in
+                        if let tweets = tweets {
+                            self.tweets = tweets
+                        }
+                    })
+                }))
+            }
+
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -44,14 +66,6 @@ class HomeViewController: UIViewController, UITableViewDataSource
     }
     func update()
     {
-        API.shared.getTweets { (tweets) -> () in
-            if let tweets = tweets {
-                self.tweets = tweets
-                API.shared.getUser{ (user: User?) -> () in
-                    print(user?.name) 
-                }
-            }
-        }
     }
 }
 

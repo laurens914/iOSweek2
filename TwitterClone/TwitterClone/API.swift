@@ -38,18 +38,12 @@ class API {
 
     var account: ACAccount?
 
-    func getTweets(completion: (tweets: [Tweet]?) -> ()) {
-        if account == nil {
-            login({ (account: ACAccount?) -> () in
-                if let account = account {
-                    self.account = account
-                    self.updateTimeline(completion)
-                }
-            })
-        }
-        else {
-            self.updateTimeline(completion)
-        }
+    func getAccounts(completion: (accounts: [ACAccount]?) -> ()) {
+        login(completion)
+    }
+
+    func getTweetsForAccount(account: ACAccount, completion: (tweets: [Tweet]?) -> ()) {
+        self.updateTimelineForAccount(account, completion: completion)
     }
 
     func getUser(completion: (user: User?) -> ()) {
@@ -68,29 +62,29 @@ class API {
         }
     }
 
-    private func login(completion: (account: ACAccount?) -> ()) {
+    private func login(completion: (account: [ACAccount]?) -> ()) {
         let accountStore = ACAccountStore()
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted: Bool, error: NSError!) -> Void in
-            var account: ACAccount?
+            var accounts: [ACAccount]?
 
             if granted {
-                if let accounts = accountStore.accountsWithAccountType(accountType) as? [ACAccount] {
-                    print("\(accounts.count) Twitter accounts found")
-                    account = accounts.first
-                }
+                accounts = accountStore.accountsWithAccountType(accountType) as? [ACAccount]
+                print("\(accounts?.count) Twitter accounts found")
             }
             else {
                 print("Access to Twitter accounts not granted.")
             }
 
-            completion(account: account)
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completion(account: accounts)
+            })
         }
     }
 
-    private func updateTimeline(completion: (tweets: [Tweet]?) -> ()) {
+    private func updateTimelineForAccount(account: ACAccount, completion: (tweets: [Tweet]?) -> ()) {
         let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: nil)
-        request.account = self.account
+        request.account = account
         request.performRequestWithHandler { (data: NSData!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
             var tweets: [Tweet]?
 
