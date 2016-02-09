@@ -58,8 +58,9 @@ extension HomeViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let tweetCell = self.tableView.dequeueReusableCellWithIdentifier("tweetCell" , forIndexPath: indexPath)
-        let tweetText = tweets[indexPath.row].text
-        tweetCell.textLabel?.text = tweetText
+        let tweet = tweets[indexPath.row]
+        tweetCell.textLabel?.text = tweet.text
+        tweetCell.detailTextLabel?.text = tweet.user?.name
         return tweetCell
     }
     
