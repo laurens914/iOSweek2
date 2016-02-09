@@ -17,6 +17,21 @@ class API {
     func getTweets() {}
     func getUser() {}
 
-    private func login() {}
+    private func login(completion: (account: ACAccount?) -> ()) {
+        let accountStore = ACAccountStore()
+        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted: Bool, error: NSError!) -> Void in
+            var account: ACAccount?
+
+            if granted {
+                if let accounts = accountStore.accountsWithAccountType(accountType) as? [ACAccount] {
+                    account = accounts.first
+                }
+            }
+
+            completion(account: account)
+        }
+    }
+
     private func updateTimeline() {}
 }
