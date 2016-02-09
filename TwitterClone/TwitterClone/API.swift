@@ -74,7 +74,9 @@ class API {
                 print("Unknown response: \(response.statusCode)")
             }
 
-            completion(tweets: tweets)
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completion(tweets: tweets)
+            })
         }
     }
 }
