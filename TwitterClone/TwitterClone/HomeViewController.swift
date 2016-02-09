@@ -51,22 +51,35 @@ class HomeViewController: UIViewController, UITableViewDataSource
     func update()
     {
         API.shared.getAccounts { (accounts) -> () in
-            let alertController = UIAlertController(title: "Choose an account", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             guard let accounts = accounts else {
                 return
             }
 
-            for account in accounts {
-                alertController.addAction(UIAlertAction(title: account.username, style: .Default, handler: {(_) -> () in
-                    API.shared.getTweetsForAccount(account, completion: {(tweets) -> () in
-                        if let tweets = tweets {
-                            self.tweets = tweets
-                        }
-                    })
-                }))
-            }
+            switch accounts.count {
 
-            self.presentViewController(alertController, animated: true, completion: nil)
+            case 0:
+                let alertController = UIAlertController(title: "No Accounts Found", message: "Add your account in Settings.", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            case 1:
+                API.shared.getTweetsForAccount(accounts[0], completion: {(tweets) -> () in
+                    if let tweets = tweets {
+                        self.tweets = tweets
+                    }
+                })
+            default:
+                let alertController = UIAlertController(title: "Choose an account", message: "", preferredStyle: .ActionSheet)
+                for account in accounts {
+                    alertController.addAction(UIAlertAction(title: account.username, style: .Default, handler: {(_) -> () in
+                        API.shared.getTweetsForAccount(account, completion: {(tweets) -> () in
+                            if let tweets = tweets {
+                                self.tweets = tweets
+                            }
+                        })
+                    }))
+                }
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
         }
     }
 }
