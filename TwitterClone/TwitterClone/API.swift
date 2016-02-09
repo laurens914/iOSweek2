@@ -16,11 +16,15 @@ class API {
 
     var account: ACAccount?
 
-    func getTweets() {
+    func getTweets(completion: (tweets: [Tweet]?) -> ()) {
         if account == nil {
             login({ (account: ACAccount?) -> () in
                 self.account = account
+                self.updateTimeline(completion)
             })
+        }
+        else {
+            self.updateTimeline(completion)
         }
     }
 
