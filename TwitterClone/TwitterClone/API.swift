@@ -14,7 +14,16 @@ class API {
     static let shared = API()
     private init() {}
 
-    func getTweets() {}
+    var account: ACAccount?
+
+    func getTweets() {
+        if account == nil {
+            login({ (account: ACAccount?) -> () in
+                self.account = account
+            })
+        }
+    }
+
     func getUser() {}
 
     private func login(completion: (account: ACAccount?) -> ()) {
