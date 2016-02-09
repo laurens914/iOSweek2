@@ -34,8 +34,24 @@ class HomeViewController: UIViewController, UITableViewDataSource
 
 
     override func viewDidAppear(animated: Bool) {
+        update()
+    }
+    
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        //Dispose of any resources that can be recreated.
+    }
+
+    func setupTableView()
+    {
+       self.tableView.dataSource = self
+    }
+
+    func update()
+    {
         API.shared.getAccounts { (accounts) -> () in
-            let alertController = UIAlertController(title: "Which account?", message: "Pick one!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let alertController = UIAlertController(title: "Choose an account", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             guard let accounts = accounts else {
                 return
             }
@@ -52,20 +68,6 @@ class HomeViewController: UIViewController, UITableViewDataSource
 
             self.presentViewController(alertController, animated: true, completion: nil)
         }
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        //Dispose of any resources that can be recreated.
-    }
-
-    func setupTableView()
-    {
-       self.tableView.dataSource = self
-    }
-    func update()
-    {
     }
 }
 
