@@ -19,8 +19,10 @@ class API {
     func getTweets(completion: (tweets: [Tweet]?) -> ()) {
         if account == nil {
             login({ (account: ACAccount?) -> () in
-                self.account = account
-                self.updateTimeline(completion)
+                if let account = account {
+                    self.account = account
+                    self.updateTimeline(completion)
+                }
             })
         }
         else {
@@ -38,8 +40,12 @@ class API {
 
             if granted {
                 if let accounts = accountStore.accountsWithAccountType(accountType) as? [ACAccount] {
+                    print("\(accounts.count) Twitter accounts found")
                     account = accounts.first
                 }
+            }
+            else {
+                print("Access to Twitter accounts not granted.")
             }
 
             completion(account: account)

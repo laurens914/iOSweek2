@@ -48,15 +48,4 @@ class JSONParser
         guard let location = tweetJSON["location"] as? String else { fatalError("Failed to Parse the location. Something is wrong with JSON.") }
         return User(name: name, profileImageUrl: profileImageUrl, location: location)
     }
-    
-    
-    
-    //MARK: fist day, load JSON from bundle
-    
-    class func JSONData() -> NSData
-    {
-        guard let tweetJSONPath = NSBundle.mainBundle().URLForResource("tweet", withExtension: "json") else { fatalError("missing tweet.json file") }
-        guard let tweetJSONData = NSData(contentsOfURL: tweetJSONPath) else { fatalError("Error Creating NSData Object,") }
-        return tweetJSONData
-    }
 }
