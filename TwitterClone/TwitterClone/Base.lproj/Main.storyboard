@@ -120,17 +120,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F6F-NB-MmY">
-                                <rect key="frame" x="226" y="64" width="149" height="128"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlC-SK-nJr">
-                                <rect key="frame" x="235" y="240" width="140" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlC-SK-nJr">
+                                <rect key="frame" x="279" y="260" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-pU-PjN">
-                                <rect key="frame" x="277" y="472" width="46" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVK-EN-as0">
+                                <rect key="frame" x="279" y="289" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-pU-PjN">
+                                <rect key="frame" x="273" y="318" width="54" height="30"/>
                                 <state key="normal" title="Dismiss"/>
                                 <connections>
                                     <action selector="dismissButton:" destination="E7z-IZ-HME" eventType="touchUpInside" id="p3e-d3-443"/>
@@ -139,13 +142,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RaJ-pU-PjN" firstAttribute="centerY" secondItem="yz2-jJ-g4q" secondAttribute="centerY" id="6sZ-De-R34"/>
-                            <constraint firstItem="RaJ-pU-PjN" firstAttribute="centerX" secondItem="yz2-jJ-g4q" secondAttribute="centerX" id="uJN-Hp-fkA"/>
+                            <constraint firstItem="RaJ-pU-PjN" firstAttribute="top" secondItem="jVK-EN-as0" secondAttribute="bottom" constant="8" id="K0u-ua-HyZ"/>
+                            <constraint firstItem="jVK-EN-as0" firstAttribute="centerY" secondItem="yz2-jJ-g4q" secondAttribute="centerY" id="gxI-XX-YZP"/>
+                            <constraint firstItem="RaJ-pU-PjN" firstAttribute="centerX" secondItem="jVK-EN-as0" secondAttribute="centerX" id="ho9-W9-ExB"/>
+                            <constraint firstItem="UlC-SK-nJr" firstAttribute="centerX" secondItem="jVK-EN-as0" secondAttribute="centerX" id="kAD-HK-c4c"/>
+                            <constraint firstItem="jVK-EN-as0" firstAttribute="top" secondItem="UlC-SK-nJr" secondAttribute="bottom" constant="8" id="rGy-UD-dwZ"/>
+                            <constraint firstItem="jVK-EN-as0" firstAttribute="centerX" secondItem="yz2-jJ-g4q" secondAttribute="centerX" id="udr-Ov-nSB"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="profileImage" destination="F6F-NB-MmY" id="Qzs-b7-vDv"/>
-                        <outlet property="username" destination="UlC-SK-nJr" id="YOD-r7-2ii"/>
+                        <outlet property="location" destination="jVK-EN-as0" id="afw-Yi-X4Q"/>
+                        <outlet property="username" destination="UlC-SK-nJr" id="lBC-xE-bLq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fs0-je-aaP" userLabel="First Responder" sceneMemberID="firstResponder"/>

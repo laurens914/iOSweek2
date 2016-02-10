@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController, Identity
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupProfileViewController()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,13 +33,20 @@ class ProfileViewController: UIViewController, Identity
     completion()
 }
 
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
+        
     
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var username: UILabel!
+   
     func setupProfileViewController ()
     {
+        
+        self.username.text = "michael"
+        self.location.text = "Seattle, WA"
+        
         if let user = self.user {
-          self.username.text = user.name
+
+        //
         }
         
     }
