@@ -9,7 +9,7 @@
 import UIKit
 
 typealias JSONParserCompletion = (success: Bool, tweets: [Tweet]?) -> ()
-
+typealias JSONParserUserCompletion = (success: Bool, user: User?) -> ()
 class JSONParser
 {
     class func tweetJSONFrom(data: NSData, completion: JSONParserCompletion)
@@ -38,6 +38,17 @@ class JSONParser
         } catch _ { completion(success: false, tweets: nil) }
     }
     
+    class func userJSONFrom(data: NSData, completion: JSONParserUserCompletion)
+    {
+        do {
+            var user: User?
+            if let rootObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String: AnyObject]{
+                user = userFromTweetJSON(rootObject)
+
+            }
+            completion(success: true, user: user)
+        } catch _ { completion(success: false, user: nil) }
+    }
     
     //MARK: Helper Functions 
     
@@ -47,16 +58,5 @@ class JSONParser
         guard let profileImageUrl = tweetJSON["profile_image_url"] as? String else { fatalError("Failed to Parse the profile image url. Something is wrong with JSON.") }
         guard let location = tweetJSON["location"] as? String else { fatalError("Failed to Parse the location. Something is wrong with JSON.") }
         return User(name: name, profileImageUrl: profileImageUrl, location: location)
-    }
-    
-    
-    
-    //MARK: fist day, load JSON from bundle
-    
-    class func JSONData() -> NSData
-    {
-        guard let tweetJSONPath = NSBundle.mainBundle().URLForResource("tweet", withExtension: "json") else { fatalError("missing tweet.json file") }
-        guard let tweetJSONData = NSData(contentsOfURL: tweetJSONPath) else { fatalError("Error Creating NSData Object,") }
-        return tweetJSONData
     }
 }

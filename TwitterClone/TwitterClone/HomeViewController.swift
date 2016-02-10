@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accounts
 
 class HomeViewController: UIViewController, UITableViewDataSource
 {
@@ -29,7 +30,11 @@ class HomeViewController: UIViewController, UITableViewDataSource
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.update()
+    }
+
+
+    override func viewDidAppear(animated: Bool) {
+        update()
     }
     
     override func didReceiveMemoryWarning()
@@ -42,16 +47,39 @@ class HomeViewController: UIViewController, UITableViewDataSource
     {
        self.tableView.dataSource = self
     }
+
     func update()
     {
-        JSONParser.tweetJSONFrom(JSONParser.JSONData()) { (success, tweets) -> () in
-            guard success else {
+        API.shared.getAccounts { (accounts) -> () in
+            guard let accounts = accounts else {
                 return
             }
-            guard let tweets = tweets else {
-                return
+
+            switch accounts.count {
+
+            case 0:
+                let alertController = UIAlertController(title: "No Accounts Found", message: "Add your account in Settings.", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            case 1:
+                API.shared.getTweetsForAccount(accounts[0], completion: {(tweets) -> () in
+                    if let tweets = tweets {
+                        self.tweets = tweets
+                    }
+                })
+            default:
+                let alertController = UIAlertController(title: "Choose an account", message: "", preferredStyle: .ActionSheet)
+                for account in accounts {
+                    alertController.addAction(UIAlertAction(title: account.username, style: .Default, handler: {(_) -> () in
+                        API.shared.getTweetsForAccount(account, completion: {(tweets) -> () in
+                            if let tweets = tweets {
+                                self.tweets = tweets
+                            }
+                        })
+                    }))
+                }
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
-            self.tweets = tweets
         }
     }
 }
@@ -62,8 +90,9 @@ extension HomeViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let tweetCell = self.tableView.dequeueReusableCellWithIdentifier("tweetCell" , forIndexPath: indexPath)
-        let tweetText = tweets[indexPath.row].text
-        tweetCell.textLabel?.text = tweetText
+        let tweet = tweets[indexPath.row]
+        tweetCell.textLabel?.text = tweet.text
+        tweetCell.detailTextLabel?.text = tweet.user?.name
         return tweetCell
     }
     
