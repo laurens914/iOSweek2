@@ -10,6 +10,7 @@ import UIKit
 
 typealias JSONParserCompletion = (success: Bool, tweets: [Tweet]?) -> ()
 typealias JSONParserUserCompletion = (success: Bool, user: User?) -> ()
+
 class JSONParser
 {
     class func tweetJSONFrom(data: NSData, completion: JSONParserCompletion)
@@ -20,20 +21,20 @@ class JSONParser
                 var tweets = [Tweet]()
                 
                 for tweetJSON in rootObject {
-                    if let text = tweetJSON["text"] as? String,
-                        id = tweetJSON["id_str"] as? String,
-                        userJSON = tweetJSON["user"] as? [String: AnyObject]{
-                            
-                            let user = self.userFromTweetJSON(userJSON)
-                            let tweet = Tweet(text: text, id: id, user: user)
-                            
-                            tweets.append(tweet)
+                    guard let tweet = self.tweetFromJSON(tweetJSON) else {return}
+                    
+                    if let originalTweet = self.originalTweet(tweetJSON) {
+                        tweet.originalTweet = originalTweet
                     }
+                    
+                    tweets.append(tweet)
+                    
                 }
                 //Completion
-                completion(success: true, tweets: tweets)
+
+                    completion(success: true, tweets: tweets)
             } else {
-                completion(success: false, tweets:nil)
+               completion(success: false, tweets: nil) 
             }
         } catch _ { completion(success: false, tweets: nil) }
     }
@@ -59,4 +60,26 @@ class JSONParser
         guard let location = tweetJSON["location"] as? String else { fatalError("Failed to Parse the location. Something is wrong with JSON.") }
         return User(name: name, profileImageUrl: profileImageUrl, location: location)
     }
+    
+    class func tweetFromJSON(tweetJSON: [String: AnyObject]) -> Tweet?
+    {
+        guard let text = tweetJSON ["text"] as? String else { return nil }
+        guard let id = tweetJSON ["id_str"] as? String else { return nil }
+        guard let userJSON = tweetJSON ["user"] as? [String: AnyObject] else { return nil }
+        
+        return Tweet( text: text, id: id, user: self.userFromTweetJSON(userJSON))
+    
+    }
+    
+    class func originalTweet (tweetJSON: [String:AnyObject]) -> Tweet?
+    {
+        guard let retweetObject = tweetJSON["retweeted_status"] as? [String:AnyObject] else { return nil}
+        guard let tweet = self.tweetFromJSON(retweetObject) else { return nil }
+        return tweet
+        
+        
+    }
+    
+    
+    
 }
