@@ -55,10 +55,10 @@ class API {
             if response.isSuccessful {
                 JSONParser.userJSONFrom(data, completion: { (success, parsedUser) -> () in
                     user = parsedUser
+                    completion(user: user)
                 })
             }
 
-            completion(user: user)
         }
     }
 
