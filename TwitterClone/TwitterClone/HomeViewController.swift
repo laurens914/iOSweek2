@@ -9,12 +9,12 @@
 import UIKit
 import Accounts
 
-class HomeViewController: UIViewController, UITableViewDataSource
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     
     var tweets = [Tweet]()
-        {
+    {
         didSet
         {
             self.tableView.reloadData()
@@ -33,7 +33,8 @@ class HomeViewController: UIViewController, UITableViewDataSource
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         update()
     }
     
@@ -45,17 +46,20 @@ class HomeViewController: UIViewController, UITableViewDataSource
     
     func setupTableView()
     {
+        self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: nil), forCellReuseIdentifier: "TweetCell")
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 100
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.delegate = self
+        
     }
-    
     
     func update()
     {
         API.shared.getAccounts { (accounts) -> () in
             guard let accounts = accounts else {
                 return
+            
             }
             
             switch accounts.count {
@@ -101,10 +105,8 @@ class HomeViewController: UIViewController, UITableViewDataSource
             guard let indexPath = self.tableView.indexPathForSelectedRow else {return}
             detailViewController.tweet = self.tweets[indexPath.row]
         }
-
       
     }
-    
     
 }
 
@@ -113,11 +115,10 @@ extension HomeViewController
 {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let tweetCell = self.tableView.dequeueReusableCellWithIdentifier("tweetCell" , forIndexPath: indexPath)
-        let tweet = tweets[indexPath.row]
-        tweetCell.textLabel?.text = tweet.text
-        tweetCell.detailTextLabel?.text = tweet.user?.name
-        return tweetCell
+        let tweetCell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell" , forIndexPath: indexPath) as! TweetCell
+            tweetCell.tweet = tweets[indexPath.row]
+            
+            return tweetCell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -125,5 +126,9 @@ extension HomeViewController
         return tweets.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath: NSIndexPath)
+    {
+        self.performSegueWithIdentifier("DetailViewController", sender: nil)
+    }
 }
 

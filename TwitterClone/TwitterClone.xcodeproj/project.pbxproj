@@ -10,6 +10,10 @@
 		892A5A2F1C6BB78E004CC551 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A2E1C6BB78E004CC551 /* ProfileViewController.swift */; };
 		892A5A311C6BB810004CC551 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A301C6BB810004CC551 /* Identity.swift */; };
 		892A5A331C6BBC0C004CC551 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A321C6BBC0C004CC551 /* DetailViewController.swift */; };
+		892A5A351C6CF1EB004CC551 /* SimpeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A341C6CF1EB004CC551 /* SimpeCache.swift */; };
+		892A5A371C6CF5D9004CC551 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892A5A361C6CF5D9004CC551 /* TweetCell.xib */; };
+		892A5A391C6CF635004CC551 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A381C6CF635004CC551 /* TweetCell.swift */; };
+		892A5A3B1C6D0AB8004CC551 /* UserTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A5A3A1C6D0AB8004CC551 /* UserTimelineViewController.swift */; };
 		89CAFF8B1C690F3D0007D6AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAFF8A1C690F3D0007D6AB /* AppDelegate.swift */; };
 		89CAFF8D1C690F3D0007D6AB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAFF8C1C690F3D0007D6AB /* HomeViewController.swift */; };
 		89CAFF901C690F3D0007D6AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CAFF8E1C690F3D0007D6AB /* Main.storyboard */; };
@@ -25,6 +29,10 @@
 		892A5A2E1C6BB78E004CC551 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		892A5A301C6BB810004CC551 /* Identity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		892A5A321C6BBC0C004CC551 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		892A5A341C6CF1EB004CC551 /* SimpeCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpeCache.swift; sourceTree = "<group>"; };
+		892A5A361C6CF5D9004CC551 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
+		892A5A381C6CF635004CC551 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = ../TweetCell.swift; sourceTree = "<group>"; };
+		892A5A3A1C6D0AB8004CC551 /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
 		89CAFF871C690F3D0007D6AB /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CAFF8A1C690F3D0007D6AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89CAFF8C1C690F3D0007D6AB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -68,11 +76,11 @@
 		89CAFF891C690F3D0007D6AB /* TwitterClone */ = {
 			isa = PBXGroup;
 			children = (
-				89CAFF9C1C6911FC0007D6AB /* View */,
 				89CAFF9D1C69120A0007D6AB /* App Global */,
 				89CAFF9E1C6912150007D6AB /* Controller */,
 				89CAFFA41C69163F0007D6AB /* Model */,
 				89CAFFA11C6913FD0007D6AB /* Utilities */,
+				89CAFF9C1C6911FC0007D6AB /* View */,
 			);
 			path = TwitterClone;
 			sourceTree = "<group>";
@@ -80,9 +88,10 @@
 		89CAFF9C1C6911FC0007D6AB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				89CAFF8E1C690F3D0007D6AB /* Main.storyboard */,
 				89CAFF911C690F3D0007D6AB /* Assets.xcassets */,
 				89CAFF931C690F3D0007D6AB /* LaunchScreen.storyboard */,
+				89CAFF8E1C690F3D0007D6AB /* Main.storyboard */,
+				892A5A361C6CF5D9004CC551 /* TweetCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -99,9 +108,11 @@
 		89CAFF9E1C6912150007D6AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				892A5A381C6CF635004CC551 /* TweetCell.swift */,
 				89CAFF8C1C690F3D0007D6AB /* HomeViewController.swift */,
 				892A5A2E1C6BB78E004CC551 /* ProfileViewController.swift */,
 				892A5A301C6BB810004CC551 /* Identity.swift */,
+				892A5A3A1C6D0AB8004CC551 /* UserTimelineViewController.swift */,
 				892A5A321C6BBC0C004CC551 /* DetailViewController.swift */,
 			);
 			name = Controller;
@@ -111,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				89CAFF9F1C6913F60007D6AB /* JSONParser.swift */,
+				892A5A341C6CF1EB004CC551 /* SimpeCache.swift */,
 				CBD1B4A41C6A801200C8BAE6 /* API.swift */,
 			);
 			name = Utilities;
@@ -186,6 +198,7 @@
 				89CAFF951C690F3D0007D6AB /* LaunchScreen.storyboard in Resources */,
 				89CAFF921C690F3D0007D6AB /* Assets.xcassets in Resources */,
 				89CAFF901C690F3D0007D6AB /* Main.storyboard in Resources */,
+				892A5A371C6CF5D9004CC551 /* TweetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,11 +209,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892A5A3B1C6D0AB8004CC551 /* UserTimelineViewController.swift in Sources */,
 				892A5A331C6BBC0C004CC551 /* DetailViewController.swift in Sources */,
 				89CAFFA61C69167C0007D6AB /* User.swift in Sources */,
 				89CAFF8D1C690F3D0007D6AB /* HomeViewController.swift in Sources */,
 				89CAFF8B1C690F3D0007D6AB /* AppDelegate.swift in Sources */,
+				892A5A391C6CF635004CC551 /* TweetCell.swift in Sources */,
 				892A5A311C6BB810004CC551 /* Identity.swift in Sources */,
+				892A5A351C6CF1EB004CC551 /* SimpeCache.swift in Sources */,
 				89CAFFA01C6913F60007D6AB /* JSONParser.swift in Sources */,
 				892A5A2F1C6BB78E004CC551 /* ProfileViewController.swift in Sources */,
 				CBD1B4A51C6A801200C8BAE6 /* API.swift in Sources */,

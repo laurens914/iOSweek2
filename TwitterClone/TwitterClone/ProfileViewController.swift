@@ -12,6 +12,8 @@ typealias ProfileViewControllerCompletion = () -> ()
 
 class ProfileViewController: UIViewController, Identity
 {
+   
+    
     var completion: ProfileViewControllerCompletion?
     var user: User?
     
@@ -37,6 +39,7 @@ class ProfileViewController: UIViewController, Identity
     
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var personalProfileImg: UIImageView!
    
     func setupProfileViewController ()
     {
@@ -49,6 +52,4 @@ class ProfileViewController: UIViewController, Identity
         }
         
     }
-    
-  
 }

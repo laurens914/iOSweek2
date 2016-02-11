@@ -43,7 +43,12 @@ class API {
     }
 
     func getTweetsForAccount(account: ACAccount, completion: (tweets: [Tweet]?) -> ()) {
-        self.updateTimelineForAccount(account, completion: completion)
+        self.updateTimelineForAccount("https://api.twitter.com/1.1/statuses/home_timeline.json", completion: completion)
+    }
+    
+    func getUserTweets (username: String, completion:(tweets: [Tweet]?)-> ())
+    {
+        self.updateTimelineForAccount("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(username)", completion: completion)
     }
 
     func getUser(completion: (user: User?) -> ()) {
@@ -81,9 +86,28 @@ class API {
             })
         }
     }
+    
+    func getImage(urlString: String, completion: (image: UIImage) -> ())
+    {
+        NSOperationQueue().addOperationWithBlock{ () -> Void in
+            guard let url = NSURL(string: urlString) else {return }
+            guard let data = NSData(contentsOfURL: url) else {return}
+            guard let image = UIImage(data:data) else {return}
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completion(image: image)
+            })
+        }
+    }
 
-    private func updateTimelineForAccount(account: ACAccount, completion: (tweets: [Tweet]?) -> ()) {
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: nil)
+    private func updateTimelineForAccount(urlString: String, completion: (tweets: [Tweet]?) -> ())
+    {
+        let request = SLRequest(
+            forServiceType: SLServiceTypeTwitter,
+            requestMethod: SLRequestMethod.GET,
+            URL: NSURL(string: urlString),
+            parameters: nil)
+        
         request.account = account
         request.performRequestWithHandler { (data: NSData!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
             var tweets: [Tweet]?

@@ -58,7 +58,8 @@ class JSONParser
         guard let name = tweetJSON["name"] as? String else { fatalError("Failed to Parse the Name. Something is wrong with JSON.") }
         guard let profileImageUrl = tweetJSON["profile_image_url"] as? String else { fatalError("Failed to Parse the profile image url. Something is wrong with JSON.") }
         guard let location = tweetJSON["location"] as? String else { fatalError("Failed to Parse the location. Something is wrong with JSON.") }
-        return User(name: name, profileImageUrl: profileImageUrl, location: location)
+        guard let screenName = tweetJSON["screen_name"] as? String else { fatalError() }
+        return User(name: name, profileImageUrl: profileImageUrl, location: location, screenName: screenName)
     }
     
     class func tweetFromJSON(tweetJSON: [String: AnyObject]) -> Tweet?
@@ -73,7 +74,6 @@ class JSONParser
     
     class func originalTweet (tweetJSON: [String:AnyObject]) -> Tweet?
     {
-        print(tweetJSON)
         guard let retweetObject = tweetJSON["retweeted_status"] as? [String:AnyObject] else { return nil}
         guard let tweet = self.tweetFromJSON(retweetObject) else { return nil }
         return tweet
