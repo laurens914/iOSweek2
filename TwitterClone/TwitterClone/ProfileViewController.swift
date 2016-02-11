@@ -40,13 +40,12 @@ class ProfileViewController: UIViewController, Identity
    
     func setupProfileViewController ()
     {
-        
-        self.username.text = "michael"
-        self.location.text = "Seattle, WA"
-        
-        if let user = self.user {
-
-        //
+        API.shared.getUser { (user) -> () in
+            if let user = user{
+                print(user.name)
+                self.username.text = user.name
+                self.location.text = user.location
+            }
         }
         
     }

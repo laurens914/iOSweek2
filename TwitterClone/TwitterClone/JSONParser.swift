@@ -73,6 +73,7 @@ class JSONParser
     
     class func originalTweet (tweetJSON: [String:AnyObject]) -> Tweet?
     {
+        print(tweetJSON)
         guard let retweetObject = tweetJSON["retweeted_status"] as? [String:AnyObject] else { return nil}
         guard let tweet = self.tweetFromJSON(retweetObject) else { return nil }
         return tweet

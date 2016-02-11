@@ -92,16 +92,39 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKQ-nb-tiC">
+                                <rect key="frame" x="279" y="312" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.11559264837763752" green="0.29614682227747335" blue="0.71682755235602102" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JXx-GS-AUs" firstAttribute="leading" secondItem="YhO-Yq-SZM" secondAttribute="leading" constant="20" id="1qh-iQ-FIS"/>
                             <constraint firstAttribute="trailing" secondItem="JXx-GS-AUs" secondAttribute="trailing" constant="20" id="6RY-Dy-k0V"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="8" id="A7e-mf-xUe"/>
                             <constraint firstItem="JXx-GS-AUs" firstAttribute="centerY" secondItem="YhO-Yq-SZM" secondAttribute="centerY" id="OVU-Be-ji0"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="2" id="WPP-mu-RBf"/>
+                            <constraint firstItem="JXx-GS-AUs" firstAttribute="centerX" secondItem="AKQ-nb-tiC" secondAttribute="centerX" id="brp-rY-HXQ"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="8" id="gKB-GV-5iK"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="8" id="oct-c2-7on"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="8" id="uMj-mo-Uxr"/>
+                            <constraint firstItem="AKQ-nb-tiC" firstAttribute="top" secondItem="JXx-GS-AUs" secondAttribute="bottom" constant="2" id="vj6-zK-Yr8"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="A7e-mf-xUe"/>
+                                <exclude reference="gKB-GV-5iK"/>
+                                <exclude reference="oct-c2-7on"/>
+                                <exclude reference="uMj-mo-Uxr"/>
+                                <exclude reference="vj6-zK-Yr8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="tweetText" destination="JXx-GS-AUs" id="DfA-K5-wMq"/>
+                        <outlet property="userName" destination="AKQ-nb-tiC" id="DiD-6o-OTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vVN-av-laC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -120,20 +143,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlC-SK-nJr">
-                                <rect key="frame" x="279" y="260" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlC-SK-nJr">
+                                <rect key="frame" x="300" y="292" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVK-EN-as0">
-                                <rect key="frame" x="279" y="289" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVK-EN-as0">
+                                <rect key="frame" x="300" y="300" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-pU-PjN">
-                                <rect key="frame" x="273" y="318" width="54" height="30"/>
+                                <rect key="frame" x="273" y="308" width="54" height="30"/>
                                 <state key="normal" title="Dismiss"/>
                                 <connections>
                                     <action selector="dismissButton:" destination="E7z-IZ-HME" eventType="touchUpInside" id="p3e-d3-443"/>
