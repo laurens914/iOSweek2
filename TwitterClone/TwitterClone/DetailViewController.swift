@@ -23,7 +23,7 @@ class DetailViewController: UIViewController, Identity
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.setupApperance()
+        self.setupApperance()
         self.setupDetailViewController()
     }
     override func didReceiveMemoryWarning() {
@@ -53,6 +53,11 @@ class DetailViewController: UIViewController, Identity
                 }
             }
         }
+    }
+    
+    func setupApperance()
+    {
+      self.profileImageView.layer.cornerRadius = 25.0
     }
     
     func profileImage(key: String, completion: (image:UIImage) -> ())
